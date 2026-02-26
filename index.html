@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIP Solutions</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f9fbfd;
+            color: #333;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: 0.4s;
+        }
+
+            header.scrolled {
+                background: #020617;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+            .nav ul li {
+                margin-left: 20px;
+            }
+
+                .nav ul li a {
+                    text-decoration: none;
+                    font-weight: 500;
+                    color: #fff;
+                    transition: 0.3s;
+                }
+
+        header.scrolled .nav ul li a {
+            color: #f97316;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15,23,42,.45), rgba(15,23,42,.3)), url("images/banner.png") center/cover;
+            position: relative;
+        }
+
+            .hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                /*background: rgba(0,0,0,0.5);*/ /* overlay */
+            }
+
+        .hero-container {
+            position: relative;
+            max-width: 1100px; /* same width as Services/Projects */
+            height: 100%; /* full hero height */
+            padding: 0 20px; /* horizontal spacing */
+            display: flex;
+            flex-direction: column;
+        }
+        /* Banner header & description confined to left half */
+        .hero-left {
+            position: absolute;
+            top: 50px; /* spacing from top */
+            left: 0;
+            width: 50%; /* left half */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: calc(100% - 100px); /* spacing top & bottom */
+        }
+
+        .hero-header {
+            font-size: 3rem;
+            color: #fff;
+            line-height: 1.2;
+            word-break: break-word; /* wrap long text */
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+
+        /* RESPONSIVE HERO */
+        @media(max-width:768px) {
+            .hero-left {
+                width: 90%;
+                top: 20px;
+                height: calc(100% - 40px);
+            }
+
+            .hero-header {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+        }
+
+
+
+        /* ===== SECTIONS ===== */
+        section {
+            display: flex;
+            flex-direction: column;
+            padding: 120px 10% 60px;
+        }
+
+            section:not(.hero):nth-of-type(even) {
+                background: #eef3f8;
+            }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #1e88e5;
+        }
+
+        /* ===== SERVICES FADE SLIDER ONLY ===== */
+
+        #services .service-tab-container {
+            max-width: 1100px;
+            margin: auto;
+            position: relative;
+            height: 420px; /* same as slide height */
+        }
+
+        #services .service-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 420px; /* fixed height */
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+            #services .service-slide.active {
+                opacity: 1;
+                pointer-events: auto;
+                position: relative;
+            }
+
+
+
+        .service-text {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+            .service-text > *:not(h3) {
+                overflow-y: auto;
+            }
+
+        .service-image {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .service-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* THIS is the key */
+            }
+
+        .service-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .service-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Tabs */
+        .service-tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+            .service-tabs .service-tab {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #ddd;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                .service-tabs .service-tab.active {
+                    background: #1e88e5;
+                }
+
+
+        /* ===== SERVICE NUMBERED LIST UPDATED ===== */
+        .service-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* reduced gap between items */
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #000;
+        }
+
+            .service-item:hover {
+                background: rgba(0,0,0,0.05);
+                transition: background 0.3s;
+            }
+
+        .service-list .service-item:last-child {
+            border-bottom: none; /* remove line after last item */
+        }
+
+        .service-name {
+            font-size: 1rem;
+        }
+
+        .service-number {
+            font-weight: bold;
+            color: #000; /* changed from blue to black */
+            margin-left: 10px; /* reduced space between text and number */
+        }
+
+        /* Remove line from main items ONLY in commercial slide */
+        .commercial-slide .service-item {
+            border-bottom: none;
+        }
+
+        /* Wrap each service + subservices */
+        .service-block {
+            padding: 8px 0 15px 0;
+            border-bottom: 1px solid #000;
+        }
+
+            /* Remove border from last block */
+            .service-block:last-child {
+                border-bottom: none;
+            }
+
+        /* Sub service styling */
+        .sub-service-list {
+            margin: 6px 0 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sub-service {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+            .sub-service::before {
+                content: "- ";
+                color: #1e88e5;
+            }
+
+        @media(max-width:768px) {
+
+            /* Container should grow naturally */
+            #services .service-tab-container {
+                height: auto;
+            }
+
+            /* Slides stack vertically */
+            #services .service-slide {
+                position: absolute;
+                flex-direction: column;
+                height: 500px; /* controlled mobile height */
+            }
+
+                #services .service-slide.active {
+                    position: relative;
+                }
+
+            /* Text area with internal scroll */
+            .service-text {
+                flex: none;
+                height: 250px;
+                padding-right: 0;
+                overflow-y: auto;
+            }
+
+            /* Image fixed clean height */
+            .service-image {
+                flex: none;
+                height: 250px;
+            }
+
+                .service-image img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+        }
+
+        /* ===== ABOUT (NO SLIDE) ===== */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .about-text {
+            /* Keep all service-text styles */
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+            .about-text h3 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                color: #000;
+            }
+
+            .about-text p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+        .about-image {
+            flex: 1;
+        }
+
+            .about-image img {
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+        /* Mobile */
+        @media(max-width:768px) {
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+
+        /* ===== PROJECT SLIDES WITH FADE ===== */
+        .project-tab-container {
+            max-width: 1100px;
+            margin: auto;
+            position: relative; /* for absolute positioning of slides */
+            min-height: 300px; /* ensures container height is consistent */
+        }
+
+        .project-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none; /* prevent interaction on hidden slides */
+        }
+
+            .project-slide.active {
+                opacity: 1;
+                pointer-events: auto; /* allow interaction on active slide */
+                position: relative; /* bring active slide into flow */
+            }
+
+        .project-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .project-info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .project-image {
+            flex: 1;
+        }
+
+            .project-image img {
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+        /* Tabs */
+        .project-tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .project-tab {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .project-tab.active {
+                background: #1e88e5;
+            }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .project-content {
+                flex-direction: column;
+            }
+        }
+
+
+        /* CONTACT */
+        .contact-section {
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 80px 20px;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        /* Logo area */
+        .contact-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .contact-logo img {
+                width: 80%;
+                max-width: 320px;
+                aspect-ratio: 1 / 1;
+                object-fit: contain;
+            }
+
+        /* Content */
+        .contact-content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .contact-content p {
+            color: #cbd5f5;
+            margin-bottom: 12px;
+        }
+
+        .contact-details p {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-logo img {
+                width: 60%;
+                max-width: 220px;
+            }
+        }
+
+        footer {
+            background: #020617;
+            color: #94a3b8;
+            text-align: center;
+            padding: 24px 10px;
+            font-size: 14px;
+            border-top: 3px solid #f97316;
+        }
+
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px) {
+            .nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: #fff;
+                width: 200px;
+                display: none;
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+                .nav ul.show {
+                    display: block;
+                }
+
+                .nav ul li {
+                    margin: 10px 0;
+                }
+
+            header .nav ul li a {
+                color: #000;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .service-slide {
+                flex-direction: column !important;
+            }
+
+            section {
+                padding: 100px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header">
+        <div class="container nav">
+            <div class="logo">
+                <img src="images/logo.png" alt="KIPS">
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul id="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-left">
+                <h1 class="hero-header">Kreative Infra & Power Solutions</h1>
+                <p class="hero-description">
+                    KIPS is a turnkey solutions provider with over two
+                    decades of expertise in infrastructure
+                    development, interior fit-outs, project management,
+                    and Kitchen Equipment's, Facility management. We
+                    specialize in delivering end-to-end solutions from
+                    design to execution for commercial, residential,
+                    industrial, healthcare sectors etc., and take up
+                    AMC`s to maintain end to end Facility management.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- SERVICES WITH SLIDER -->
+    <section id="services">
+
+        <div class="service-tab-container">
+            <div class="service-slide active">
+                <div class="service-text">
+                    <h3>Sectors We Serve</h3>
+                    <div class="service-list">
+                        <div class="service-item">
+                            <span class="service-name">Residential</span>
+                            <span class="service-number">01</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-name">Corporate & Commercial</span>
+                            <span class="service-number">02</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-name">Industrial</span>
+                            <span class="service-number">03</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-name">Retail & Showrooms</span>
+                            <span class="service-number">04</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-name">Education</span>
+                            <span class="service-number">05</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-name">Hospitality</span>
+                            <span class="service-number">06</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="service-image">
+                    <img src="images/service_1.png" alt="Sectors We Serve">
+                </div>
+            </div>
+
+            <div class="service-slide commercial-slide">
+                <div class="service-text">
+                    <h3>Our Services</h3>
+
+                    <div class="service-list">
+
+                        <!-- Service Block 1 -->
+                        <div class="service-block">
+
+                            <div class="service-item">
+                                <span class="service-name">Construction Planning</span>
+                                <span class="service-number">01</span>
+                            </div>
+
+                            <div class="sub-service-list">
+                                <div class="sub-service">Site Analysis</div>
+                                <div class="sub-service">Budget Estimation</div>
+                            </div>
+
+                        </div>
+
+                        <!-- Service Block 2 -->
+                        <div class="service-block">
+
+                            <div class="service-item">
+                                <span class="service-name">Foundation Work</span>
+                                <span class="service-number">02</span>
+                            </div>
+
+                            <div class="sub-service-list">
+                                <div class="sub-service">Soil Testing</div>
+                                <div class="sub-service">Concrete Pouring</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="service-image">
+                    <img src="images/service_2_2.png" alt="Commercial Construction">
+                </div>
+            </div>
+        </div>
+
+        <div class="service-tabs">
+            <span class="service-tab active" onclick="showService(0)"></span>
+            <span class="service-tab" onclick="showService(1)"></span>
+        </div>
+
+    </section>
+
+    <!-- ABOUT (SINGLE BLOCK) -->
+    <!-- ABOUT SECTION (Unique classes) -->
+    <section id="about">
+
+        <div class="about-container">
+
+            <div class="about-slide">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/aboutus.png"
+                             alt="Construction Team">
+                    </div>
+
+                    <div class="about-text">
+                        <h3>Founder & Visionary</h3>
+                        <p>
+                            Mr. Narasimha Murthy K, an Electrical Engineer from Anantapur,
+                            and a Management graduate from Symbiosis, Pune, brings over
+                            20+ years of expertise in delivering end-to-end turnkey projects
+                            across India. With a strong foundation in interior design, project
+                            management, and infrastructure solutions, he has successfully led
+                            large-scale commercial, residential, and industrial developments.
+                        </p>
+                        <p style="margin-top:15px;">
+                            Murthy began his career in Service Industry in 2001 and simultaneously
+                            started career in Projects Management in 2011, gaining extensive
+                            experience in executing complex projects across diverse sectors. He worked
+                            with different organizations until June 2025, during which he successfully
+                            handled multiple projects across India — all except the IVF hospital chain
+                            project, which he delivered independently.
+
+
+
+                            In July 2025, he founded KIPS, driven by a vision to deliver future-ready,
+                            high-quality turnkey solutions that combine technical excellence with client-
+                            centric values.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects">
+
+        <div class="project-tab-container">
+
+            <!-- Project 1 -->
+            <div class="project-slide active">
+                <div class="project-content">
+
+                    <div class="project-info">
+                        <img src="images/project_1_logo.png"
+                             alt="Client Company Logo"
+                             class="project-logo">
+
+                        <h3>Skyline Tower</h3>
+
+                        <p><strong>Place:</strong> New York, USA</p>
+                        <p><strong>Status:</strong> Completed (2023)</p>
+                        <p>
+                            <strong>Scope:</strong> 25-floor commercial office building
+                            including structural, electrical and interior finishing works.
+                        </p>
+                    </div>
+
+                    <div class="project-image">
+                        <img src="images/project_1.png"
+                             alt="Skyline Tower Project">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-slide">
+                <div class="project-content">
+
+                    <div class="project-info">
+                        <img src="images/project_2_logo.png"
+                             alt="Client Company Logo"
+                             class="project-logo">
+
+                        <h3>Green Valley Residences</h3>
+
+                        <p><strong>Place:</strong> California, USA</p>
+                        <p><strong>Status:</strong> Ongoing</p>
+                        <p>
+                            <strong>Scope:</strong> 120-unit luxury residential
+                            development with landscaping and parking facilities.
+                        </p>
+                    </div>
+
+                    <div class="project-image">
+                        <img src="images/project_2.png"
+                             alt="Green Valley Residences Project">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tabs -->
+        <div class="project-tabs">
+            <span class="project-tab active" onclick="showProject(0)"></span>
+            <span class="project-tab" onclick="showProject(1)"></span>
+        </div>
+
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+
+            <!-- Left: Square Company Logo -->
+            <div class="contact-logo">
+                <img src="images/contactus.png"
+                     alt="Contact Image">
+            </div>
+
+            <!-- Right: Contact Info -->
+            <div class="contact-content">
+                <h2>Contact Us</h2>
+                <p>Let’s build something strong together.</p>
+
+                <div class="contact-details">
+                    <p>
+                        <strong>📍 Address:</strong> C-113, Commanders Glory, Singapura,
+                        Vidyaranyapura, Bangaluru-560097
+                    </p>
+                    <p><strong>📞 Phone:</strong> +91 70222 53055</p>
+                    <p><strong>✉ Email:</strong> info@kipsolutions.in</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer>
+        <div class="footer-bottom">
+            <p>© 2026 KIP Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("nav-links").classList.toggle("show");
+        }
+
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById("nav-links").classList.remove("show");
+            });
+        });
+
+        window.addEventListener("scroll", function () {
+            const header = document.getElementById("header");
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+
+        // ===== SERVICES SLIDER =====
+        const serviceSlides = document.querySelectorAll('.service-slide');
+        const serviceTabs = document.querySelectorAll('.service-tab');
+        const serviceSection = document.querySelector('#services');
+        const serviceTextAreas = document.querySelectorAll('.service-text');
+
+        let serviceAutoIndex = 0;
+        let serviceInterval = null;
+        let serviceAutoRunning = true;
+
+        // Start auto slide
+        function startServiceAutoSlide() {
+            if (!serviceInterval) {
+                serviceInterval = setInterval(autoSlideServices, 5000);
+            }
+        }
+
+        // Stop auto slide
+        function stopServiceAutoSlide() {
+            clearInterval(serviceInterval);
+            serviceInterval = null;
+        }
+
+        // Show slide
+        function showService(index, stopAuto = true) {
+            serviceSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                serviceTabs[i].classList.toggle('active', i === index);
+            });
+            serviceAutoIndex = index;
+
+            // If user manually clicks → permanently stop
+            if (stopAuto && serviceAutoRunning) {
+                stopServiceAutoSlide();
+                serviceAutoRunning = false;
+            }
+        }
+
+        // Auto slide function
+        function autoSlideServices() {
+            serviceAutoIndex = (serviceAutoIndex + 1) % serviceSlides.length;
+            showService(serviceAutoIndex, false);
+        }
+
+        // Tab click
+        serviceTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => showService(index, true));
+        });
+
+        // ===== Pause on hover (desktop) =====
+        serviceSection.addEventListener('mouseenter', () => {
+            if (serviceAutoRunning) stopServiceAutoSlide();
+        });
+
+        serviceSection.addEventListener('mouseleave', () => {
+            if (serviceAutoRunning) startServiceAutoSlide();
+        });
+
+        // ===== Pause when user scrolls inside text (desktop + mobile) =====
+        serviceTextAreas.forEach(textArea => {
+            // Mouse scroll (desktop)
+            textArea.addEventListener('mouseenter', () => {
+                if (serviceAutoRunning) stopServiceAutoSlide();
+            });
+
+            textArea.addEventListener('mouseleave', () => {
+                if (serviceAutoRunning) startServiceAutoSlide();
+            });
+
+            // Touch scroll (mobile)
+            textArea.addEventListener('touchstart', () => {
+                if (serviceAutoRunning) stopServiceAutoSlide();
+            });
+
+            textArea.addEventListener('touchend', () => {
+                if (serviceAutoRunning) startServiceAutoSlide();
+            });
+        });
+
+        // Start auto slide initially
+        startServiceAutoSlide();
+
+        // ===== PROJECTS SLIDER =====
+        const projectSlides = document.querySelectorAll('.project-slide');
+        const projectTabs = document.querySelectorAll('.project-tab');
+
+        let projectAutoIndex = 0;
+        let projectInterval = setInterval(autoSlideProjects, 5000);
+        let projectAutoRunning = true;
+
+        function showProject(index, stopAuto = true) {
+            projectSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                projectTabs[i].classList.toggle('active', i === index);
+            });
+            projectAutoIndex = index;
+
+            if (stopAuto && projectAutoRunning) {
+                clearInterval(projectInterval);
+                projectAutoRunning = false;
+            }
+        }
+
+        projectTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => showProject(index, true));
+        });
+
+        function autoSlideProjects() {
+            projectAutoIndex = (projectAutoIndex + 1) % projectSlides.length;
+            showProject(projectAutoIndex, false);
+        }
+    </script>
+
+</body>
+</html>
