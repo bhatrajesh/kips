@@ -198,15 +198,13 @@
 
         .service-text {
             flex: 1;
-            padding-right: 40px;
+            padding-right: 20px;
             display: flex;
             flex-direction: column;
             height: 100%;
+            overflow-y: auto; /* only here */
+            scrollbar-width: none; /* Firefox */
         }
-
-            .service-text > *:not(h3) {
-                overflow-y: auto;
-            }
 
         .service-image {
             flex: 1;
@@ -344,9 +342,17 @@
             .service-text {
                 flex: none;
                 height: 250px;
-                padding-right: 0;
                 overflow-y: auto;
+                padding-right: 18px; /* space from scrollbar */
+                margin-right: -8px; /* keeps layout aligned */
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
             }
+
+                .service-text::-webkit-scrollbar {
+                    width: 4px;
+                }
+
 
             /* Image fixed clean height */
             .service-image {
@@ -359,6 +365,24 @@
                     object-fit: cover;
                 }
         }
+
+        .service-text:hover {
+            scrollbar-width: thin; /* Firefox */
+        }
+
+            .service-text:hover::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .service-text:hover::-webkit-scrollbar-thumb {
+                background: rgba(0,0,0,0.3);
+                border-radius: 10px;
+            }
+
+            .service-text:hover::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
 
         /* ===== ABOUT (NO SLIDE) ===== */
         .about-content {
