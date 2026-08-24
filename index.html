@@ -413,16 +413,6 @@
                 line-height: 1.6;
             }
 
-        .about-image {
-            flex: 1;
-        }
-
-            .about-image img {
-                width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-
         /* Mobile */
         @media(max-width:768px) {
             .about-content {
@@ -520,67 +510,6 @@
             }
         }
 
-        /* ===== ELECTRICAL & IT GALLERY ===== */
-        .section-subtitle {
-            text-align: center;
-            margin-top: -25px;
-            margin-bottom: 40px;
-            color: #555;
-            font-size: 1.05rem;
-        }
-
-        .gallery-group {
-            max-width: 1100px;
-            width: 100%;
-            margin: 0 auto 45px;
-        }
-
-            .gallery-group:last-child {
-                margin-bottom: 0;
-            }
-
-        .gallery-group-title {
-            font-size: 1.4rem;
-            color: #000;
-            margin-bottom: 20px;
-            border-left: 4px solid #f97316; /* orange accent already used in site */
-            padding-left: 12px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            /* auto-fill (not auto-fit) keeps empty tracks so the 2-card IT group
-               stays the same card width as the 4-card Electrical group */
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .gallery-card {
-            border-radius: 10px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-            .gallery-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-            }
-
-            .gallery-card img {
-                width: 100%;
-                aspect-ratio: 4 / 3;
-                object-fit: cover;
-                display: block;
-            }
-
-        .gallery-caption {
-            padding: 12px 15px;
-            font-size: 0.95rem;
-            color: #333;
-        }
-
         /* CONTACT */
         .contact-section {
             background: #0f172a;
@@ -588,8 +517,7 @@
             padding: 80px 20px;
         }
 
-        /* Lock Contact's dark theme against the nth-of-type(even) background rule
-           (adding the Gallery section shifts Contact to an even position) */
+        /* Lock Contact's dark theme against the nth-of-type(even) background rule */
         #contact.contact-section {
             background: #0f172a;
         }
@@ -741,7 +669,6 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -899,11 +826,6 @@
 
             <div class="about-slide">
                 <div class="about-content">
-                    <div class="about-image">
-                        <img src="images/aboutus.png"
-                             alt="Construction Team">
-                    </div>
-
                     <div class="about-text">
                         <h3>Founder & Visionary</h3>
                         <p>
@@ -945,33 +867,6 @@
                 <div class="project-content">
 
                     <div class="project-info">
-                        <img src="images/project_1_logo.png"
-                             alt="INDIRA IVF Logo"
-                             class="project-logo">
-
-                        <h3>INDIRA IVF</h3>
-
-                        <p><strong>Place:</strong> Davanagere Main Centre,BLR​</p>
-                        <p><strong>Status:</strong> On-Going</p>
-                        <p>
-                            <strong>Scope:</strong> Major infrastructure development
-                            including, utilities, and public spaces.
-                        </p>
-                    </div>
-
-                    <div class="project-image">
-                        <img src="images/project_1.png"
-                             alt="INDIRA IVF Project">
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-slide">
-                <div class="project-content">
-
-                    <div class="project-info">
                         <img src="images/project_2_logo.png"
                              alt="illy Logo"
                              class="project-logo">
@@ -995,7 +890,7 @@
                 </div>
             </div>
 
-            <!-- Project 3 -->
+            <!-- Project 2 -->
             <div class="project-slide">
                 <div class="project-content">
 
@@ -1023,7 +918,7 @@
                 </div>
             </div>
 
-            <!-- Project 4 -->
+            <!-- Project 3 -->
             <div class="project-slide">
                 <div class="project-content">
 
@@ -1051,7 +946,7 @@
                 </div>
             </div>
 
-            <!-- Project 5 -->
+            <!-- Project 4 -->
             <div class="project-slide">
                 <div class="project-content">
 
@@ -1079,7 +974,7 @@
                 </div>
             </div>
 
-            <!-- Project 6 -->
+            <!-- Project 5 -->
             <div class="project-slide">
                 <div class="project-content">
 
@@ -1116,65 +1011,10 @@
             <span class="project-tab" onclick="showProject(2)"></span>
             <span class="project-tab" onclick="showProject(3)"></span>
             <span class="project-tab" onclick="showProject(4)"></span>
-            <span class="project-tab" onclick="showProject(5)"></span>
         </div>
 
     </section>
 
-     <!-- ELECTRICAL & IT GALLERY -->
-    <section id="gallery">
-
-        <h2 class="section-title">Electrical &amp; IT Projects</h2>
-        <p class="section-subtitle">Executed at Indira IVF Main Centre, Davanagere</p>
-
-        <!-- Electrical Works -->
-        <div class="gallery-group">
-            <h3 class="gallery-group-title">Electrical Works</h3>
-            <div class="gallery-grid">
-
-                <div class="gallery-card">
-                    <img src="images/Electrical_1.jpeg"
-                         alt="LT panels and main distribution boards">
-                    <div class="gallery-caption">LT Panels &amp; Main Distribution</div>
-                </div>
-
-                <div class="gallery-card">
-                    <img src="images/Electrical_2.jpeg"
-                         alt="Electrical panel room with safety signage">
-                    <div class="gallery-caption">Electrical Panel Room with Safety Signage</div>
-                </div>
-
-                <div class="gallery-card">
-                    <img src="images/Electrical_3.jpeg"
-                         alt="200A ES and DG ATS panel with power cabling">
-                    <div class="gallery-caption">EB &amp; DG ATS Panel with Cabling</div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- IT & Networking -->
-        <div class="gallery-group">
-            <h3 class="gallery-group-title">IT &amp; Networking</h3>
-            <div class="gallery-grid">
-
-                <div class="gallery-card">
-                    <img src="images/IT_1.jpeg"
-                         alt="Network and server rack with patch panels">
-                    <div class="gallery-caption">Network &amp; Server Rack</div>
-                </div>
-
-                <div class="gallery-card">
-                    <img src="images/IT_2.jpeg"
-                         alt="UPS and battery backup system">
-                    <div class="gallery-caption">UPS &amp; Battery Backup System</div>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-    
     <section id="contact" class="contact-section">
         <div class="contact-container">
 
